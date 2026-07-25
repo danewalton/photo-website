@@ -9,23 +9,24 @@ export interface Gallery {
 // folder at src/assets/photos/<slug>/ — drop photos in and they show up.
 export const galleries: Gallery[] = [
   {
-    slug: 'maternity',
-    title: 'Maternity',
-    description: 'Maternity sessions celebrating new beginnings.',
+    slug: "maternity",
+    title: "Maternity",
+    description: "Maternity sessions celebrating new beginnings.",
   },
   {
-    slug: 'portraits',
-    title: 'Portraits',
-    description: 'Individual, couple, and family portrait sessions.',
+    slug: "engagements",
+    title: "Engagements",
+    description:
+      "Engagement sessions capturing the excitement and emotion of newly engaged couples.",
   },
   {
-    slug: 'events',
-    title: 'Events',
-    description: 'Weddings, engagements, and other special occasions.',
+    slug: "events",
+    title: "Events",
+    description: "Weddings, engagements, and other special occasions.",
   },
   {
-    slug: 'personal',
-    title: 'Personal Work',
-    description: 'Personal projects and photography explorations.',
+    slug: "personal",
+    title: "Personal Work",
+    description: "Personal projects and photography explorations.",
   },
 ];
