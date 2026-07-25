@@ -31,6 +31,19 @@ one):
 
 The homepage, nav, and gallery page are all generated from that one file.
 
+### Choosing the homepage hero photo
+
+By default, the homepage hero is whichever photo sorts first alphabetically
+across all gallery folders — not usually the one you want. To pin a
+specific photo instead, add a file named `hero.jpg` (or `.jpeg`, `.png`,
+`.webp`) directly under `src/assets/` (not inside `photos/`):
+
+```
+src/assets/hero.jpg
+```
+
+If present, it always wins. Remove it to fall back to the automatic pick.
+
 ## Local development
 
 ```bash
@@ -56,5 +69,8 @@ under **Settings → Pages**, set the source to **GitHub Actions**.
 
 The custom domain is set via `public/CNAME` (`photo.danewalton.com`) and
 also needs to be entered in **Settings → Pages → Custom domain** with
-"Enforce HTTPS" checked once DNS has propagated. See the DNS setup notes
-shared alongside this repo for the Namecheap-side configuration.
+"Enforce HTTPS" checked once DNS has propagated. DNS for danewalton.com
+is managed in Cloudflare (not Namecheap, despite Namecheap being the
+registrar) — add a `CNAME` record: `photo` → `danewalton.github.io`,
+proxy status **DNS only** until the domain verifies and HTTPS is issued,
+then switch to **Proxied** if desired.

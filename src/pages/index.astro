@@ -9,7 +9,12 @@ const hero = getHeroPhoto();
 
 <BaseLayout title="Home">
   <section class="hero">
-    {hero && <Image class="hero-image" src={hero} alt="" width={1600} widths={[640, 1024, 1600]} loading="eager" />}
+    {hero && (
+      <div class="hero-media">
+        <Image class="hero-image" src={hero} alt="" width={1600} widths={[640, 1024, 1600]} loading="eager" />
+        <span class="scroll-cue" aria-hidden="true">&#8595;</span>
+      </div>
+    )}
     <div class="hero-text">
       <h1>Dane Walton Photography</h1>
       <p>Portraits, maternity, and life's milestones — captured simply and honestly.</p>

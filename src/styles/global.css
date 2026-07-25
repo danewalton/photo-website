@@ -168,11 +168,39 @@ img {
   position: relative;
 }
 
+.hero-media {
+  position: relative;
+}
+
 .hero-image {
   width: 100%;
   aspect-ratio: 16 / 9;
+  max-height: min(70vh, 720px);
   object-fit: cover;
   filter: grayscale(100%);
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  opacity: 0.85;
+  font-size: 1.5rem;
+  line-height: 1;
+  animation: scroll-cue-bounce 1.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes scroll-cue-bounce {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 8px);
+  }
 }
 
 .hero-text {
