@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const services = [
+  {
+    name: 'Maternity',
+    description:
+      'Relaxed sessions celebrating the final weeks of pregnancy — outdoors, at home, or in studio.',
+  },
+  {
+    name: 'Portraits',
+    description: 'Individual, couple, and family portraits with a natural, editorial feel.',
+  },
+  {
+    name: 'Events',
+    description: 'Weddings, engagements, and milestone celebrations, shot candidly with minimal direction.',
+  },
+  {
+    name: 'Personal Work',
+    description: 'Ongoing personal projects and explorations outside of client work.',
+  },
+];
+---
+
+<BaseLayout title="About" description="About Dane Walton Photography and the sessions I offer.">
+  <div class="page-intro">
+    <h1>About</h1>
+    <p>
+      I'm Dane — a photographer focused on simple, honest images of the people and moments that
+      matter. Below is a bit about the kinds of sessions I shoot.
+    </p>
+  </div>
+
+  <div class="container">
+    <div class="services-list">
+      {services.map((s) => (
+        <div class="service">
+          <h3>{s.name}</h3>
+          <p>{s.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

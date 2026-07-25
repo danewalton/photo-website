@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import { galleries } from '../data/galleries';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Photography by Dane Walton.' } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+function isActive(path: string) {
+  return currentPath === path || currentPath === `${path}/`;
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title} · Dane Walton Photography</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-title" href="/">Dane Walton</a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+        <span>Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav-wrap">
+        <ul class="site-nav">
+          <li><a href="/" aria-current={isActive('/') ? 'page' : undefined}>Home</a></li>
+          {galleries.map((g) => (
+            <li>
+              <a
+                href={`/galleries/${g.slug}/`}
+                aria-current={isActive(`/galleries/${g.slug}`) ? 'page' : undefined}
+              >
+                {g.title}
+              </a>
+            </li>
+          ))}
+          <li><a href="/about/" aria-current={isActive('/about') ? 'page' : undefined}>About</a></li>
+          <li><a href="/contact/" aria-current={isActive('/contact') ? 'page' : undefined}>Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <span>&copy; {new Date().getFullYear()} Dane Walton Photography</span>
+      <a href="mailto:hello@danewalton.com">hello@danewalton.com</a>
+    </footer>
+
+    <script>
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('site-nav');
+      toggle?.addEventListener('click', () => {
+        const isOpen = nav?.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    </script>
+  </body>
+</html>

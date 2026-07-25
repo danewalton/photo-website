@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { galleries } from '../data/galleries';
+import { getHeroPhoto, getPhotosForGallery } from '../lib/photos';
+
+const hero = getHeroPhoto();
+---
+
+<BaseLayout title="Home">
+  <section class="hero">
+    {hero && <Image class="hero-image" src={hero} alt="" width={1600} widths={[640, 1024, 1600]} loading="eager" />}
+    <div class="hero-text">
+      <h1>Dane Walton Photography</h1>
+      <p>Portraits, maternity, and life's milestones — captured simply and honestly.</p>
+      <a class="button" href="/contact/">Get in touch</a>
+    </div>
+  </section>
+
+  <div class="gallery-grid-nav">
+    {galleries.map((g) => {
+      const photos = getPhotosForGallery(g.slug);
+      const cover = photos[0];
+      return (
+        <a href={`/galleries/${g.slug}/`}>
+          {cover ? (
+            <Image src={cover} alt="" width={600} />
+          ) : (
+            <div class="empty" style="height:100%;">Coming soon</div>
+          )}
+          <div class="label">
+            <h3>{g.title}</h3>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+</BaseLayout>

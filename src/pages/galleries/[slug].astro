@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { galleries } from '../../data/galleries';
+import { getPhotosForGallery } from '../../lib/photos';
+
+export function getStaticPaths() {
+  return galleries.map((gallery) => ({
+    params: { slug: gallery.slug },
+    props: { gallery },
+  }));
+}
+
+const { gallery } = Astro.props;
+const photos = getPhotosForGallery(gallery.slug);
+---
+
+<BaseLayout title={gallery.title} description={gallery.description}>
+  <div class="page-intro">
+    <h1>{gallery.title}</h1>
+    <p>{gallery.description}</p>
+  </div>
+
+  {photos.length > 0 ? (
+    <div class="photo-grid container">
+      {photos.map((photo) => (
+        <figure>
+          <Image src={photo} alt="" width={800} widths={[400, 800, 1200]} class="lightbox-trigger" />
+        </figure>
+      ))}
+    </div>
+  ) : (
+    <p class="empty-state">Photos from this collection are coming soon.</p>
+  )}
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">Close</button>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+</BaseLayout>
+
+<script>
+  const grid = document.querySelector('.photo-grid');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const closeBtn = document.getElementById('lightbox-close');
+
+  grid?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'IMG') {
+      const img = target as HTMLImageElement;
+      lightboxImg.src = img.src;
+      lightbox?.classList.add('is-open');
+    }
+  });
+
+  function close() {
+    lightbox?.classList.remove('is-open');
+    lightboxImg.src = '';
+  }
+
+  closeBtn?.addEventListener('click', close);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+</script>
