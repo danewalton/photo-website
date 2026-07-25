@@ -34,15 +34,19 @@ The homepage, nav, and gallery page are all generated from that one file.
 ### Choosing the homepage hero photo
 
 By default, the homepage hero is whichever photo sorts first alphabetically
-across all gallery folders — not usually the one you want. To pin a
-specific photo instead, add a file named `hero.jpg` (or `.jpeg`, `.png`,
-`.webp`) directly under `src/assets/` (not inside `photos/`):
+across all gallery folders — not usually the one you want. To pin specific
+photos instead, drop them in `src/assets/hero/`:
 
 ```
-src/assets/hero.jpg
+src/assets/hero/
+  01-hero.jpg
+  02-hero.jpg
 ```
 
-If present, it always wins. Remove it to fall back to the automatic pick.
+If that folder has any photos, they're used instead of the automatic pick.
+One photo = a static hero. Two or more = they cross-fade into each other
+automatically, cycling every 6 seconds. Filenames are shown in sorted
+order, so prefix with numbers if you want a specific sequence.
 
 ## Local development
 
