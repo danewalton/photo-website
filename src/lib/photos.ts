@@ -1,13 +1,17 @@
 import type { ImageMetadata } from 'astro';
 
+// Glob matching is case-sensitive, and many cameras default to uppercase
+// extensions (e.g. .JPG), so both cases are listed explicitly here.
+// (import.meta.glob needs a literal string pattern — it can't resolve one
+// built from a shared constant.)
 const allPhotos = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/photos/**/*.{jpeg,jpg,png,webp}',
+  '/src/assets/photos/**/*.{jpeg,jpg,png,webp,JPEG,JPG,PNG,WEBP}',
   { eager: true }
 );
 
 // Manual hero picks: drop one or more images in src/assets/hero/
 const heroFolder = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/hero/*.{jpeg,jpg,png,webp}',
+  '/src/assets/hero/*.{jpeg,jpg,png,webp,JPEG,JPG,PNG,WEBP}',
   { eager: true }
 );
 
