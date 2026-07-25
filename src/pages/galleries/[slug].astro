@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { galleries } from '../../data/galleries';
-import { getPhotosForGallery } from '../../lib/photos';
+import { getSessionsForGallery } from '../../lib/photos';
 
 export function getStaticPaths() {
   return galleries.map((gallery) => ({
@@ -12,7 +12,8 @@ export function getStaticPaths() {
 }
 
 const { gallery } = Astro.props;
-const photos = getPhotosForGallery(gallery.slug);
+const sessions = getSessionsForGallery(gallery.slug);
+const hasPhotos = sessions.some((session) => session.photos.length > 0);
 ---
 
 <BaseLayout title={gallery.title} description={gallery.description}>
@@ -21,12 +22,21 @@ const photos = getPhotosForGallery(gallery.slug);
     <p>{gallery.description}</p>
   </div>
 
-  {photos.length > 0 ? (
-    <div class="photo-grid container">
-      {photos.map((photo) => (
-        <figure>
-          <Image src={photo} alt="" width={800} widths={[400, 800, 1200]} class="lightbox-trigger" />
-        </figure>
+  {hasPhotos ? (
+    <div class="gallery-body">
+      {sessions.map((session) => (
+        <section class="photo-session">
+          <div class="container">
+            {session.title && <h2 class="session-title">{session.title}</h2>}
+            <div class="photo-grid">
+              {session.photos.map((photo) => (
+                <figure>
+                  <Image src={photo} alt="" width={800} widths={[400, 800, 1200]} />
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
       ))}
     </div>
   ) : (
@@ -40,12 +50,12 @@ const photos = getPhotosForGallery(gallery.slug);
 </BaseLayout>
 
 <script>
-  const grid = document.querySelector('.photo-grid');
+  const body = document.querySelector('.gallery-body');
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
   const closeBtn = document.getElementById('lightbox-close');
 
-  grid?.addEventListener('click', (e) => {
+  body?.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
     if (target.tagName === 'IMG') {
       const img = target as HTMLImageElement;

@@ -31,6 +31,29 @@ one):
 
 The homepage, nav, and gallery page are all generated from that one file.
 
+### Grouping photos into sessions
+
+Photos placed directly in a category folder are shown as one flat grid, same
+as always. To keep separate shoots visually distinct instead (e.g. two
+different maternity clients), put each session in its own subfolder:
+
+```
+src/assets/photos/maternity/
+  2026-03-smith-family/
+    01.jpg
+    02.jpg
+  2026-06-jones-family/
+    01.jpg
+```
+
+Each subfolder gets its own heading (derived from the folder name — a
+leading date like `2026-03-` is stripped, dashes/underscores become
+spaces, and words are capitalized, so `2026-03-smith-family` becomes
+"Smith Family") and a divider between sessions. Sessions are sorted by
+folder name, so a date prefix keeps them in chronological order. You can
+still leave some photos directly in the category folder (no subfolder) —
+they're grouped together with no heading, ahead of any named sessions.
+
 ### Choosing the homepage hero photo
 
 By default, the homepage hero is whichever photo sorts first alphabetically

@@ -293,6 +293,18 @@ img {
   font-size: 0.85rem;
 }
 
+.photo-session + .photo-session {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.session-title {
+  color: var(--color-muted);
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
