@@ -25,6 +25,11 @@ export const galleries: Gallery[] = [
     description: "Weddings, engagements, and other special occasions.",
   },
   {
+    slug: "weddings",
+    title: "Weddings",
+    description: "Ceremonies, portraits, and celebrations from wedding days.",
+  },
+  {
     slug: "personal",
     title: "Personal Work",
     description: "Personal projects and photography explorations.",
