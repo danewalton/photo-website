@@ -69,9 +69,18 @@ photo's actual pixel dimensions are checked automatically:
 
 - Close to square (roughly 0.9–1.1:1) → cropped to a true 1:1 square
   instead of the standard 4:5.
-- Very wide (roughly 2.2:1 or beyond) → spans the full row at its natural
-  width, uncropped, instead of being squeezed into a grid cell.
+- Very wide (roughly 2.2:1 or beyond, e.g. a horizontal TX-1 panoramic) →
+  spans the full row at its natural width, uncropped.
+- Very tall (roughly 1:2.2 or narrower, e.g. a vertical/portrait TX-1
+  panoramic) → stays in its own grid cell rather than spanning the row,
+  sized to the row's height with its real (narrow) width, uncropped and
+  centered — capped at 500px tall if it ends up with no row-mates to
+  match height with.
 - Everything else → untouched, same 4:5 grid as always.
+
+Rows also use `grid-auto-flow: dense`, so if a wide/tall photo can't fit
+where it falls in the order, later normal photos backfill the gap instead
+of leaving it empty.
 
 This only reshapes the handful of outlier-format photos; a normal session
 with no unusual formats looks exactly as it did before.

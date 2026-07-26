@@ -321,6 +321,8 @@ img {
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-auto-flow: dense;
+  align-items: center;
   gap: clamp(0.5rem, 1.5vw, 1rem);
   padding: clamp(1rem, 3vw, 2rem) 0;
 }
@@ -376,6 +378,24 @@ img {
 .photo-grid figure.is-panoramic img {
   height: auto;
   max-height: 70vh;
+  object-fit: contain;
+}
+
+/* Tall (vertical panoramic) shots: keep their own grid cell rather than
+   spanning the row, but size to the row's height and let width follow the
+   photo's real aspect ratio instead of being cropped to 4:5. */
+.photo-grid figure.is-tall {
+  aspect-ratio: auto;
+  width: auto;
+  max-height: 500px;
+  justify-self: center;
+  overflow: hidden;
+}
+
+.photo-grid figure.is-tall img {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
   object-fit: contain;
 }
 
