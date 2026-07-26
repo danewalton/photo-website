@@ -29,8 +29,10 @@ export interface PhotoSession {
 }
 
 function formatSessionTitle(folder: string): string {
-  const withoutDate = folder.replace(/^\d{4}(-\d{2}){0,2}[-_\s]*/, '');
-  const base = withoutDate.length > 0 ? withoutDate : folder;
+  // Strips a leading sort key — a date (2026-03-) or a plain order
+  // prefix (01-, 2-) — so it controls ordering without showing in the title.
+  const withoutPrefix = folder.replace(/^\d[\d_-]*[-_\s]+/, '');
+  const base = withoutPrefix.length > 0 ? withoutPrefix : folder;
   return base
     .replace(/[-_]+/g, ' ')
     .trim()

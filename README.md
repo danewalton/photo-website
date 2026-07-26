@@ -49,10 +49,16 @@ src/assets/photos/maternity/
 Each subfolder gets its own heading (derived from the folder name — a
 leading date like `2026-03-` is stripped, dashes/underscores become
 spaces, and words are capitalized, so `2026-03-smith-family` becomes
-"Smith Family") and a divider between sessions. Sessions are sorted by
-folder name, so a date prefix keeps them in chronological order. You can
-still leave some photos directly in the category folder (no subfolder) —
-they're grouped together with no heading, ahead of any named sessions.
+"Smith Family") and a divider between sessions. You can still leave some
+photos directly in the category folder (no subfolder) — they're grouped
+together with no heading, ahead of any named sessions.
+
+Sessions are sorted by folder name, so a date prefix keeps them
+chronological. If you'd rather control the order directly instead of by
+date, use a plain numeric prefix the same way — `01-smith-family`,
+`02-jones-family` — it's stripped from the title the same as a date
+would be. Since sorting is plain text, not numeric, zero-pad past 9
+sessions (`09-`, `10-`, not `9-`, `10-`) so ordering doesn't break.
 
 ### Choosing the homepage hero photo
 
