@@ -117,7 +117,7 @@ img {
   cursor: pointer;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1180px) {
   .site-header {
     flex-wrap: wrap;
   }
@@ -303,6 +303,19 @@ img {
   color: var(--color-muted);
   font-size: 1.25rem;
   margin-bottom: 0;
+}
+
+.camera-meta {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.camera-description {
+  margin: 0.75rem 0 0;
+  max-width: 640px;
 }
 
 .photo-grid {

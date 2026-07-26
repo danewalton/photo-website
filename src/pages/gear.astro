@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { cameras } from '../data/gear';
+import { getPhotosForGallery } from '../lib/photos';
+---
+
+<BaseLayout title="Gear" description="The film and digital cameras behind the work.">
+  <div class="page-intro">
+    <h1>Gear</h1>
+    <p>
+      A mix of film and digital, each with its own look. Here's what I shoot with and the kind
+      of results each one gives.
+    </p>
+  </div>
+
+  <div class="gallery-body">
+    {cameras.map((camera) => {
+      const photos = getPhotosForGallery(`gear/${camera.slug}`);
+      return (
+        <section class="photo-session">
+          <div class="container">
+            <h2 class="session-title">{camera.name}</h2>
+            <p class="camera-meta">
+              {camera.type}
+              {camera.format ? ` · ${camera.format}` : ''}
+            </p>
+            <p class="camera-description">{camera.description}</p>
+            {photos.length > 0 && (
+              <div class="photo-grid">
+                {photos.map((photo) => (
+                  <figure>
+                    <Image src={photo} alt="" width={800} widths={[400, 800, 1200]} />
+                  </figure>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    })}
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">Close</button>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+</BaseLayout>
+
+<script>
+  const body = document.querySelector('.gallery-body');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const closeBtn = document.getElementById('lightbox-close');
+
+  body?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'IMG') {
+      const img = target as HTMLImageElement;
+      lightboxImg.src = img.src;
+      lightbox?.classList.add('is-open');
+    }
+  });
+
+  function close() {
+    lightbox?.classList.remove('is-open');
+    lightboxImg.src = '';
+  }
+
+  closeBtn?.addEventListener('click', close);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+</script>

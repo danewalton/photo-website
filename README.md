@@ -60,6 +60,18 @@ date, use a plain numeric prefix the same way — `01-smith-family`,
 would be. Since sorting is plain text, not numeric, zero-pad past 9
 sessions (`09-`, `10-`, not `9-`, `10-`) so ordering doesn't break.
 
+### Adding a camera to the Gear page
+
+The `/gear/` page lists each camera you shoot with, plus example shots.
+To add one:
+
+1. Add an entry to `src/data/gear.ts` with a `slug`, `name`, `type`
+   (`'Film'` or `'Digital'`), optional `format`, and `description`.
+2. Drop example photos in `src/assets/photos/gear/<slug>/` (same rules
+   as any other gallery folder — filename order, optional subfolders).
+
+If a camera has no photos yet, its write-up still shows without a grid.
+
 ### Choosing the homepage hero photo
 
 By default, the homepage hero is whichever photo sorts first alphabetically
