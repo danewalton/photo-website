@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { galleries } from '../../data/galleries';
-import { getSessionsForGallery } from '../../lib/photos';
+import { classifyAspect, getSessionsForGallery } from '../../lib/photos';
 
 export function getStaticPaths() {
   return galleries.map((gallery) => ({
@@ -29,11 +29,18 @@ const hasPhotos = sessions.some((session) => session.photos.length > 0);
           <div class="container">
             {session.title && <h2 class="session-title">{session.title}</h2>}
             <div class="photo-grid">
-              {session.photos.map((photo) => (
-                <figure>
-                  <Image src={photo} alt="" width={800} widths={[400, 800, 1200]} />
-                </figure>
-              ))}
+              {session.photos.map((photo) => {
+                const aspect = classifyAspect(photo);
+                return (
+                  <figure class={aspect === 'normal' ? undefined : `is-${aspect}`}>
+                    {aspect === 'panoramic' ? (
+                      <Image src={photo} alt="" width={1600} widths={[600, 1000, 1600]} />
+                    ) : (
+                      <Image src={photo} alt="" width={800} widths={[400, 800, 1200]} />
+                    )}
+                  </figure>
+                );
+              })}
             </div>
           </div>
         </section>

@@ -27,12 +27,18 @@ import { getPhotosForGallery } from '../lib/photos';
             </p>
             <p class="camera-description">{camera.description}</p>
             {photos.length > 0 && (
-              <div class="photo-grid">
-                {photos.map((photo) => (
-                  <figure>
-                    <Image src={photo} alt="" width={800} widths={[400, 800, 1200]} />
-                  </figure>
-                ))}
+              <div class={`photo-grid ${camera.layout ? `photo-grid--${camera.layout}` : ''}`}>
+                {photos.map((photo) =>
+                  camera.layout === 'panoramic' ? (
+                    <figure>
+                      <Image src={photo} alt="" width={1600} widths={[600, 1000, 1600]} />
+                    </figure>
+                  ) : (
+                    <figure>
+                      <Image src={photo} alt="" width={800} widths={[400, 800, 1200]} />
+                    </figure>
+                  )
+                )}
               </div>
             )}
           </div>

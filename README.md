@@ -60,6 +60,22 @@ date, use a plain numeric prefix the same way — `01-smith-family`,
 would be. Since sorting is plain text, not numeric, zero-pad past 9
 sessions (`09-`, `10-`, not `9-`, `10-`) so ordering doesn't break.
 
+### Mixed camera formats within a regular gallery
+
+If a session mixes normal shots with a square medium-format frame or a wide
+panoramic one (e.g. a Hasselblad or Fuji TX-1 shot dropped into a wedding
+or maternity folder), no special naming or subfolder is needed — every
+photo's actual pixel dimensions are checked automatically:
+
+- Close to square (roughly 0.9–1.1:1) → cropped to a true 1:1 square
+  instead of the standard 4:5.
+- Very wide (roughly 2.2:1 or beyond) → spans the full row at its natural
+  width, uncropped, instead of being squeezed into a grid cell.
+- Everything else → untouched, same 4:5 grid as always.
+
+This only reshapes the handful of outlier-format photos; a normal session
+with no unusual formats looks exactly as it did before.
+
 ### Adding a camera to the Gear page
 
 The `/gear/` page lists each camera you shoot with, plus example shots.

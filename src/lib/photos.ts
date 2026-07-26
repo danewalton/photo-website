@@ -76,6 +76,19 @@ export function getSessionsForGallery(slug: string): PhotoSession[] {
   }));
 }
 
+/**
+ * Classifies a photo by its actual pixel aspect ratio so unusually-shaped
+ * formats (square medium format, wide panoramic) can render true to their
+ * format instead of being cropped into the standard grid cell — without
+ * needing any manual naming/folder convention per photo.
+ */
+export function classifyAspect(photo: ImageMetadata): 'square' | 'panoramic' | 'normal' {
+  const ratio = photo.width / photo.height;
+  if (ratio >= 0.9 && ratio <= 1.1) return 'square';
+  if (ratio >= 2.2) return 'panoramic';
+  return 'normal';
+}
+
 export function getHeroPhotos(): ImageMetadata[] {
   const fromFolder = Object.entries(heroFolder)
     .sort(([a], [b]) => a.localeCompare(b))

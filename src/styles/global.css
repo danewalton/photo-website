@@ -338,6 +338,47 @@ img {
   overflow: hidden;
 }
 
+.photo-grid--square figure {
+  aspect-ratio: 1 / 1;
+}
+
+.photo-grid--panoramic {
+  grid-template-columns: 1fr;
+}
+
+.photo-grid--panoramic figure {
+  aspect-ratio: auto;
+  max-height: 70vh;
+  overflow: hidden;
+}
+
+.photo-grid--panoramic img {
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+/* Per-photo format overrides for mixed-format galleries (a session that
+   includes a square medium-format or wide panoramic shot alongside normal
+   ones) — the rest of the grid stays untouched. */
+.photo-grid figure.is-square {
+  aspect-ratio: 1 / 1;
+  align-self: center;
+}
+
+.photo-grid figure.is-panoramic {
+  grid-column: 1 / -1;
+  aspect-ratio: auto;
+  max-height: 70vh;
+  overflow: hidden;
+}
+
+.photo-grid figure.is-panoramic img {
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
 .empty-state {
   padding: 4rem var(--gutter);
   text-align: center;
